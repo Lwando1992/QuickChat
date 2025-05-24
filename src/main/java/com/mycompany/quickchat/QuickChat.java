@@ -10,12 +10,17 @@ package com.mycompany.quickchat;
  */
 
 
+
 import javax.swing.*;
 import java.io.*;
 import java.util.*;
 import java.util.regex.*;
-//import org.json.simple.*;
-//import org.json.simple.parser.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class QuickChat {
     private static final String FILE_NAME = "messages.json";
@@ -30,44 +35,44 @@ public class QuickChat {
     public static void main(String[] args) {
         JOptionPane.showMessageDialog(null, "Welcome to QuickChat");
         maxMessages = Integer.parseInt(JOptionPane.showInputDialog("Enter the number of messages you wish to send:"));
-//        registerUser();
+        registerUser();
     }
 
-//    private static void registerUser() {
-//        String username = JOptionPane.showInputDialog("Enter username (must contain underscore and max 5 characters):");
-//        if (!isValidUsername(username)) {
-//            JOptionPane.showMessageDialog(null, "Username is not correct");
-//            return;
-//        }
-//
-//        String password = JOptionPane.showInputDialog("Enter password (at least 8 characters, 1 capital letter, 1 number, 1 special character):");
-//        if (!isValidPassword(password)) {
-//            JOptionPane.showMessageDialog(null, "Password is not correct");
-//            return;
-//        }
-//
-//        String cellphone = JOptionPane.showInputDialog("Enter South African cellphone number (must start with +27 and 9 digits):");
-//        if (!isValidCellphone(cellphone)) {
-//            JOptionPane.showMessageDialog(null, "Cellphone number is not correct");
-//            return;
-//        }
-//
-//        JOptionPane.showMessageDialog(null, "User successfully captured");
-//        login(username, password);
-//    }
-//
-//    private static void login(String username, String password) {
-//        String inputUsername = JOptionPane.showInputDialog("Enter username to login:");
-//        String inputPassword = JOptionPane.showInputDialog("Enter password to login:");
-//
-//        if (inputUsername.equals(username) && inputPassword.equals(password)) {
-//            JOptionPane.showMessageDialog(null, "Login successful");
-//            JOptionPane.showMessageDialog(null, "Welcome " + username + ", it is great to see you again");
-//            messageMenu();
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Login details incorrect");
-//        }
-//    }
+    private static void registerUser() {
+        String username = JOptionPane.showInputDialog("Enter username (must contain underscore and max 5 characters):");
+        if (!isValidUsername(username)) {
+            JOptionPane.showMessageDialog(null, "Username is not correct");
+            return;
+        }
+
+        String password = JOptionPane.showInputDialog("Enter password (at least 8 characters, 1 capital letter, 1 number, 1 special character):");
+        if (!isValidPassword(password)) {
+            JOptionPane.showMessageDialog(null, "Password is not correct");
+            return;
+        }
+
+        String cellphone = JOptionPane.showInputDialog("Enter South African cellphone number (must start with +27 and 9 digits):");
+        if (!isValidCellphone(cellphone)) {
+            JOptionPane.showMessageDialog(null, "Cellphone number is not correct");
+            return;
+        }
+
+        JOptionPane.showMessageDialog(null, "User successfully captured");
+        login(username, password);
+    }
+
+    private static void login(String username, String password) {
+        String inputUsername = JOptionPane.showInputDialog("Enter username to login:");
+        String inputPassword = JOptionPane.showInputDialog("Enter password to login:");
+
+        if (inputUsername.equals(username) && inputPassword.equals(password)) {
+            JOptionPane.showMessageDialog(null, "Login successful");
+            JOptionPane.showMessageDialog(null, "Welcome " + username + ", it is great to see you again");
+            messageMenu();
+        } else {
+            JOptionPane.showMessageDialog(null, "Login details incorrect");
+        }
+    }
 
     private static void messageMenu() {
         while (totalMessagesSent < maxMessages) {
@@ -88,21 +93,27 @@ public class QuickChat {
         }
         JOptionPane.showMessageDialog(null, "Total messages sent: " + totalMessagesSent);
     }
-
+//This method send the message to the enters cellphone number.
     private static void sendMessage() {
+//In this line we prompt the user to input the message body.
         String message = JOptionPane.showInputDialog("Enter your message (max 250 characters):");
+        
+//In this line we check the length of the message agaist the max message length allowed on the program.        
         if (message.length() > 250) {
             JOptionPane.showMessageDialog(null, "Please enter a message of less than 250 characters");
             return;
         }
-
+//In this line we prompt the user to input the cellphone number of recipient.
         String recipientCell = JOptionPane.showInputDialog("Enter recipient's cellphone number:");
+        
+//In this line we do a validation check on the cellphne number the user enters and disply the apropriate message.        
         if (!checkRecipientCell(recipientCell)) {
             JOptionPane.showMessageDialog(null, "Recipient's cellphone number is not valid");
             return;
         }
 // In this line we call the generate message Id function to get the messageID
         String messageId = generateMessageId();
+        
 //In this line we call the createhash method and pass the messageId and message body as params to get message hsah.    
         String messageHash = createMessageHash(messageId, message);
 //        storeMessage(messageId, recipientCell, message, messageHash);
@@ -148,20 +159,19 @@ public class QuickChat {
         return recipientCell.matches("^\\+27[0-9]{9}$");
     }
 
-//    private static void storeMessage(String messageId, String recipientCell, String message, String messageHash) {
-//        JSONObject messageDetails = new JSONObject();
-//        messageDetails.put("messageId", messageId);
-//        messageDetails.put("recipientCell", recipientCell);
-//        messageDetails.put("message", message);
-//        messageDetails.put("messageHash", messageHash);
-//
-//        try (FileWriter file = new FileWriter(FILE_NAME, true)) {
-//            file.write(messageDetails.toJSONString() + "\n");
-//            sentMessages.add(message);
-//            totalMessagesSent++;
-//        } catch (IOException e) {
-//            e.printStackTrace();
+   private static void storeMessage(String messageId, String recipientCell, String message, String messageHash) {
+       JSONObject messageDetails = new JSONObject();
+       messageDetails.put("messageId", messageId);
+       messageDetails.put("recipientCell", recipientCell);
+       messageDetails.put("message", message);
+       messageDetails.put("messageHash", messageHash);
+
+        try (FileWriter file = new FileWriter(FILE_NAME, true)) {
+            file.write(messageDetails.toJSONString() + "\n");
+            sentMessages.add(message);
+            totalMessagesSent++;
+        } catch (IOException e) {
+            e.printStackTrace();
 //        }
 //    }
-}
-
+        }
