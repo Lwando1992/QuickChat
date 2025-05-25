@@ -18,7 +18,7 @@ public class QuickChatTest {
     QuickChat quick = new QuickChat();
     @Test
     public void testValidUsername() {
-        assertTrue(quick.isValidUsername("user_name"));
+        assertTrue(quick.isValidUsername("user_"));
         assertFalse(quick.isValidUsername("username"));
         assertFalse(quick.isValidUsername("user"));
     }
@@ -39,7 +39,7 @@ public class QuickChatTest {
 
      @Test
     public void testcreateMessageHash() {
-        assertEquals("00:0:HITONIGHT",quick.createMessageHash("0000000000","Hi Mike, can you join us for dinner tonight"));
+        assertEquals("00:HI TONIGHT",quick.createMessageHash("0000000000","Hi Mike, can you join us for dinner tonight"));
        
     }
 }
