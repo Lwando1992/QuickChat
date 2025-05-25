@@ -5,6 +5,8 @@
 
 import com.mycompany.quickchat.QuickChat;
 import static com.mycompany.quickchat.QuickChat.checkRecipientCell;
+import static com.mycompany.quickchat.QuickChat.generateMessageId();
+
 import java.util.Random;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,6 +36,6 @@ public class QuickChatTest {
     
      @Test
     public void testCreateMessageID() {
-        assertTrue(int,QuickChat.generateMessageId());
+        assertTrue(int,quick.generateMessageId());
        }
 }
