@@ -9,18 +9,11 @@ package com.mycompany.quickchat;
  * @author User
  */
 
-
-
 import javax.swing.*;
 import java.io.*;
 import java.util.*;
 import java.util.regex.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class QuickChat {
     private static final String FILE_NAME = "messages.json";
@@ -159,19 +152,7 @@ public class QuickChat {
         return recipientCell.matches("^\\+27[0-9]{9}$");
     }
 
-   private static void storeMessage(String messageId, String recipientCell, String message, String messageHash) {
-       JSONObject messageDetails = new JSONObject();
-       messageDetails.put("messageId", messageId);
-       messageDetails.put("recipientCell", recipientCell);
-       messageDetails.put("message", message);
-       messageDetails.put("messageHash", messageHash);
-
-        try (FileWriter file = new FileWriter(FILE_NAME, true)) {
-            file.write(messageDetails.toJSONString() + "\n");
-            sentMessages.add(message);
-            totalMessagesSent++;
-        } catch (IOException e) {
-            e.printStackTrace();
+  
 //        }
 //    }
         }
