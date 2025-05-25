@@ -4,6 +4,8 @@
  */
 
 import com.mycompany.quickchat.QuickChat;
+import static com.mycompany.quickchat.QuickChat.checkRecipientCell;
+import java.util.Random;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,30 +18,32 @@ import static org.junit.jupiter.api.Assertions.*;
 public class QuickChatTest {
 
     QuickChat quick = new QuickChat();
-    @Test
-    public void testValidUsername() {
-        assertTrue(quick.isValidUsername("user_"));
-        assertFalse(quick.isValidUsername("username"));
-        assertFalse(quick.isValidUsername("user"));
-    }
-
-    @Test
-    public void testValidPassword() {
-        assertTrue(quick.isValidPassword("Password1!"));
-        assertFalse(quick.isValidPassword("password"));
-        assertFalse(quick.isValidPassword("Pass1"));
-    }
-
+   
     @Test
     public void testValidCellphone() {
-        assertTrue(quick.isValidCellphone("+27123456789"));
-        assertFalse(quick.isValidCellphone("123456789"));
-        assertFalse(quick.isValidCellphone("+2787654321"));
+        assertTrue(quick.checkRecipientCell("+27123456789"));
+        assertFalse(quick.checkRecipientCell("123456789"));
+        assertFalse(quick.checkRecipientCell("+2787654321"));
     }
 
-     @Test
+    @Test
     public void testcreateMessageHash() {
-        assertEquals("00:HI TONIGHT",quick.createMessageHash("0000000000","Hi Mike, can you join us for dinner tonight"));
-       
+        assertEquals("00:0:HITONIGHT",quick.createMessageHash("0000000000","Hi Mike, can you join us for dinner tonight"));
+       }
+    
+    
+     @Test
+    public void testCreateMessageID() {
+        assertTrue(int,quick.generateMessageId());
+       }
+    
+    
+    
+    
+    public static String  {
+        Random rand = new Random();
+        String messageId = String.valueOf(rand.nextInt(1000000000));
+        messageIds.add(messageId);
+        return messageId;
     }
 }

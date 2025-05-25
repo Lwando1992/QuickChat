@@ -90,7 +90,6 @@ public class QuickChat {
     public static void sendMessage() {
 //In this line we prompt the user to input the message body.
         String message = JOptionPane.showInputDialog("Enter your message (max 250 characters):");
-        
 //In this line we check the length of the message agaist the max message length allowed on the program.        
         if (message.length() > 250) {
             JOptionPane.showMessageDialog(null, "Please enter a message of less than 250 characters");
