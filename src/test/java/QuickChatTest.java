@@ -11,8 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author User
  */
-import static org.junit.Assert.*;
-import org.junit.Test;
+
 
 public class QuickChatTest {
 

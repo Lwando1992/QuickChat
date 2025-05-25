@@ -31,7 +31,7 @@ public class QuickChat {
         registerUser();
     }
 
-    private static void registerUser() {
+    public static void registerUser() {
         String username = JOptionPane.showInputDialog("Enter username (must contain underscore and max 5 characters):");
         if (!isValidUsername(username)) {
             JOptionPane.showMessageDialog(null, "Username is not correct");
@@ -54,7 +54,7 @@ public class QuickChat {
         login(username, password);
     }
 
-    private static void login(String username, String password) {
+    public static void login(String username, String password) {
         String inputUsername = JOptionPane.showInputDialog("Enter username to login:");
         String inputPassword = JOptionPane.showInputDialog("Enter password to login:");
 
@@ -67,7 +67,7 @@ public class QuickChat {
         }
     }
 
-    private static void messageMenu() {
+    public static void messageMenu() {
         while (totalMessagesSent < maxMessages) {
             String choice = JOptionPane.showInputDialog("Choose an option:\n1 - Send message\n2 - Show recently sent messages (Coming soon)\n3 - Quit");
             switch (choice) {
@@ -87,7 +87,7 @@ public class QuickChat {
         JOptionPane.showMessageDialog(null, "Total messages sent: " + totalMessagesSent);
     }
 //This method send the message to the enters cellphone number.
-    private static void sendMessage() {
+    public static void sendMessage() {
 //In this line we prompt the user to input the message body.
         String message = JOptionPane.showInputDialog("Enter your message (max 250 characters):");
         
@@ -115,23 +115,23 @@ public class QuickChat {
     
     
 //This method validates the username by checking if the string matches the regex pattern.
-    private static boolean isValidUsername(String username) {
+    public static boolean isValidUsername(String username) {
         return username.matches("^[a-zA-Z0-9_]{1,5}$") && username.contains("_");
     }
 
 //This method validates the password by checking if the string matches the regex pattern.
-    private static boolean isValidPassword(String password) {
+    public static boolean isValidPassword(String password) {
         return password.length() >= 8 && password.matches(".*[A-Z].*") && password.matches(".*[0-9].*") && password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*");
     }
     
     
 //This method validates the cellphone number by checking if the string matches the regex pattern.
-    private static boolean isValidCellphone(String cellphone) {
+    public static boolean isValidCellphone(String cellphone) {
         return cellphone.matches("^\\+27[0-9]{9}$");
     }
     
 //This method creates the message Id using the random class.
-    private static String generateMessageId() {
+    public static String generateMessageId() {
         Random rand = new Random();
         String messageId = String.valueOf(rand.nextInt(1000000000));
         messageIds.add(messageId);
@@ -140,7 +140,7 @@ public class QuickChat {
     
     
 //This is a method that creates the message hash by cocatenating two formated strings
-    private static String createMessageHash(String messageId, String message) {
+    public static String createMessageHash(String messageId, String message) {
         String[] words = message.split(" ");
         String hash = messageId.substring(0, 2) + ":" + words[0].toUpperCase() + " " + words[words.length - 1].toUpperCase();
         messageHashes.add(hash);
@@ -148,11 +148,10 @@ public class QuickChat {
     }
     
 //This is a method that validatesthe cellphone number of the recipient.
-    private static boolean checkRecipientCell(String recipientCell) {
+    public static boolean checkRecipientCell(String recipientCell) {
         return recipientCell.matches("^\\+27[0-9]{9}$");
     }
 
   
-//        }
-//    }
-        }
+
+}
