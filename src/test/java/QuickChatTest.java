@@ -34,16 +34,6 @@ public class QuickChatTest {
     
      @Test
     public void testCreateMessageID() {
-        assertTrue(int,quick.generateMessageId());
+        assertTrue(int,QuickChat.generateMessageId());
        }
-    
-    
-    
-    
-    public static String  {
-        Random rand = new Random();
-        String messageId = String.valueOf(rand.nextInt(1000000000));
-        messageIds.add(messageId);
-        return messageId;
-    }
 }
