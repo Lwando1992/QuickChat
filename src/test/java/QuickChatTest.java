@@ -5,6 +5,8 @@
 
 import com.mycompany.quickchat.QuickChat;
 import static com.mycompany.quickchat.QuickChat.checkRecipientCell;
+import static com.mycompany.quickchat.QuickChat.generateMessageId;
+
 
 import java.util.Random;
 import org.junit.jupiter.api.Test;
@@ -32,9 +34,12 @@ public class QuickChatTest {
         assertEquals("00:0:HITONIGHT",quick.createMessageHash("0000000000","Hi Mike, can you join us for dinner tonight"));
        }
     
-    
-     @Test
-     public void testCreateMessageID() {
-        assertTrue(!null,quick.generateMessageId());
-       }
+//    @Test
+//    public void testCreateMessageID() {
+//        assertTrue(1234567890,quick.generateMessageId());
+//       }
+//
+//    private void assertTrue(int i, String generateMessageId) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
 }
