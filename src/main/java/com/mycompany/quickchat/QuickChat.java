@@ -16,21 +16,21 @@ import java.util.regex.*;
 //import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class QuickChat {
-    private static final String FILE_NAME = "messages.json";
-    private static List<String> sentMessages = new ArrayList<>();
-    private static List<String> discardedMessages = new ArrayList<>();
-    private static List<String> storedMessages = new ArrayList<>();
-    private static List<String> messageHashes = new ArrayList<>();
-    private static List<String> messageIds = new ArrayList<>();
-    private static int totalMessagesSent = 0;
-    private static int maxMessages;
+  
+    public static List<String> sentMessages = new ArrayList<>();
+    public static List<String> discardedMessages = new ArrayList<>();
+    public static List<String> storedMessages = new ArrayList<>();
+    public static List<String> messageHashes = new ArrayList<>();
+    public static List<String> messageIds = new ArrayList<>();
+    public static int totalMessagesSent = 0;
+    public static int maxMessages;
 
     public static void main(String[] args) {
         JOptionPane.showMessageDialog(null, "Welcome to QuickChat");
         maxMessages = Integer.parseInt(JOptionPane.showInputDialog("Enter the number of messages you wish to send:"));
         registerUser();
     }
-
+//This method registers the user it also uses if statements to check the entered values against the requirements.
     public static void registerUser() {
         String username = JOptionPane.showInputDialog("Enter username (must contain underscore and max 5 characters):");
         if (!isValidUsername(username)) {
@@ -53,12 +53,12 @@ public class QuickChat {
         JOptionPane.showMessageDialog(null, "User successfully captured");
         login(username, password);
     }
-
+//This is the login method this method takes the username and password 
     public static void login(String username, String password) {
         String inputUsername = JOptionPane.showInputDialog("Enter username to login:");
         String inputPassword = JOptionPane.showInputDialog("Enter password to login:");
-
-        if (inputUsername.equals(username) && inputPassword.equals(password)) {
+//This line ensures that both password and username are the ones that are registered. 
+       if (inputUsername.equals(username) && inputPassword.equals(password)) {
             JOptionPane.showMessageDialog(null, "Login successful");
             JOptionPane.showMessageDialog(null, "Welcome " + username + ", it is great to see you again");
             messageMenu();
@@ -66,8 +66,9 @@ public class QuickChat {
             JOptionPane.showMessageDialog(null, "Login details incorrect");
         }
     }
-
-    public static void messageMenu() {
+//This is a method that create the menu for the program. 
+   public static void messageMenu() {
+// This is a loop that keeps the program running until the speciefied number of messages afre all sent.       
         while (totalMessagesSent < maxMessages) {
             String choice = JOptionPane.showInputDialog("Choose an option:\n1 - Send message\n2 - Show recently sent messages (Coming soon)\n3 - Quit");
             switch (choice) {
